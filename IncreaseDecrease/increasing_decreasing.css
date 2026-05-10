@@ -1,0 +1,382 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Comic Sans MS', 'Trebuchet MS', cursive, sans-serif;
+    background: linear-gradient(135deg, #ffd89b 0%, #fff9e6 50%, #ffe6cc 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+/* Cute Notebook Background */
+.notebook-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff9e6;
+    z-index: 1;
+}
+
+/* Cute doodles on background */
+.doodle {
+    position: fixed;
+    opacity: 0.3;
+    font-size: 60px;
+    z-index: 2;
+}
+
+.doodle-1 { top: 10%; left: 5%; transform: rotate(-15deg); }
+.doodle-2 { top: 20%; right: 8%; transform: rotate(25deg); }
+.doodle-3 { bottom: 15%; left: 10%; transform: rotate(-25deg); }
+.doodle-4 { bottom: 20%; right: 12%; transform: rotate(15deg); }
+
+.container {
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 29px,
+            #e8b4d4 29px,
+            #e8b4d4 30px
+        ),
+        rgba(255, 255, 255, 0.95);
+    border-radius: 0px;
+    padding: 40px;
+    max-width: 900px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+    position: relative;
+    z-index: 10;
+    border: 5px dashed #ff69b4;
+}
+
+.title {
+    text-align: center;
+    font-size: 48px;
+    color: #ff1493;
+    margin-bottom: 10px;
+    text-shadow: 3px 3px 0px rgba(255, 200, 100, 0.8);
+    font-weight: bold;
+    animation: titleBounce 0.6s ease-in-out;
+}
+
+@keyframes titleBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 20px;
+    color: #ff69b4;
+    margin-bottom: 40px;
+    font-style: italic;
+}
+
+.content-section {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.card {
+    flex: 1;
+    min-width: 300px;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 4px solid;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.increasing-card {
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff69b4 100%);
+    border-color: #ff1493;
+}
+
+.decreasing-card {
+    background: linear-gradient(135deg, #b3d9ff 0%, #6699ff 100%);
+    border-color: #0066cc;
+}
+
+.card-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Balloon Container */
+.balloons-container {
+    min-height: 150px;
+    max-height: 300px;
+    position: relative;
+    margin: 20px 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 15px;
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+
+.balloon {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.balloon:hover {
+    transform: scale(1.1);
+}
+
+.balloon-bubble {
+    width: 50px;
+    height: 60px;
+    border-radius: 50% 50% 50% 0;
+    position: relative;
+    box-shadow: inset -3px -3px 10px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.balloon-string {
+    width: 2px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3));
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Increasing Balloon */
+.increasing-balloon .balloon-bubble {
+    background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 100%);
+    animation: floatUp 2s ease-in-out infinite;
+}
+
+@keyframes floatUp {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Decreasing Balloon */
+.decreasing-balloon .balloon-bubble {
+    background: linear-gradient(135deg, #6699ff 0%, #0066cc 100%);
+    animation: floatDown 2s ease-in-out infinite;
+}
+
+@keyframes floatDown {
+    0%, 100% { transform: translateY(-10px); }
+    50% { transform: translateY(10px); }
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Comic Sans MS', cursive;
+    color: white;
+}
+
+.increase-btn {
+    background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 100%);
+}
+
+.increase-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 20, 147, 0.4);
+}
+
+.decrease-btn {
+    background: linear-gradient(135deg, #6699ff 0%, #0066cc 100%);
+}
+
+.decrease-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 102, 204, 0.4);
+}
+
+.reset-btn {
+    background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+    color: #333;
+}
+
+.reset-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 165, 0, 0.4);
+}
+
+.action-btn:active {
+    transform: scale(0.98);
+}
+
+/* Particle effects */
+.particle {
+    position: absolute;
+    pointer-events: none;
+    font-size: 24px;
+    animation: particleFloat 1s ease-out forwards;
+}
+
+@keyframes particleFloat {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(0.5);
+    }
+}
+
+.counter-display {
+    font-size: 60px;
+    font-weight: bold;
+    color: white;
+    margin: 20px 0;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.emoji-reaction {
+    font-size: 50px;
+    margin-top: 10px;
+    animation: emojiJump 0.6s ease-in-out;
+}
+
+@keyframes emojiJump {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.reset-button-section {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 3px dashed #ff69b4;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .title {
+        font-size: 36px;
+    }
+
+    .content-section {
+        gap: 15px;
+    }
+
+    .card {
+        min-width: 250px;
+        padding: 20px;
+    }
+
+    .balloons-container {
+        min-height: 120px;
+        max-height: 300px;
+    }
+}
+
+/* Sound indicator */
+.sound-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    background: #ff69b4;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+    transition: all 0.3s ease;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.sound-toggle:hover {
+    transform: scale(1.1);
+}
+
+.sound-toggle.muted {
+    background: #ccc;
+}
+
+.narration-toggle {
+    position: fixed;
+    top: 20px;
+    right: 100px;
+    z-index: 100;
+    background: #4da6ff;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(77, 166, 255, 0.4);
+    transition: all 0.3s ease;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.narration-toggle:hover {
+    transform: scale(1.1);
+}
+
+.narration-toggle.muted {
+    background: #ccc;
+}
